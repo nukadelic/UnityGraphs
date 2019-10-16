@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace UnityGraphs
 {
-    public static class DrawGraphExtension 
+    public static class GraphItemExtension 
     {
         public static bool _IsVisible( this List<GraphItem> group )
         {
