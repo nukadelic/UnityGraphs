@@ -114,8 +114,6 @@ namespace UnityGraphs
             return ReadOrWrite( title )._.points;
         }
 
-        // TODO: support for Vecto3, Quaternion, ... set Title+="X"/"Y"... and combine in the same group
-
         public static List<Points> Add( string title, Quaternion rotation )
         {
             if( ! Singelton().data.ContainsKey( title ) ) 
@@ -203,6 +201,7 @@ namespace UnityGraphs
             return ReadOrWrite( title );
         }
 
+        // Clear everything
         public static void Clear()
         {
             Singelton().data = new Dictionary<string, Points>();

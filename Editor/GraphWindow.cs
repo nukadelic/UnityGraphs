@@ -136,15 +136,9 @@ namespace UnityGraphs
             DrawGraph.Clear();
 
             DrawGraph.onInput -= OnInput;            
-            // DrawGraph.onData -= OnData;
         }
 
         public bool needsRepaint = false;
-
-        // void OnData( float[] data )
-        // {
-        //     Debug.Log("Data input: " + string.Join( ",", data ) );
-        // }
 
         void OnInput()
         {
@@ -165,8 +159,7 @@ namespace UnityGraphs
             }
         }
 
-        // void OnInspectorUpdate() { Repaint(); }
-        // void OnSceneGUI() { }
+        void OnInspectorUpdate() { Repaint(); }
 
         /// https://unitylist.com/p/5c3/Unity-editor-icons
         GUIContent IconGUI( string name, bool darkSkinSupported = true )

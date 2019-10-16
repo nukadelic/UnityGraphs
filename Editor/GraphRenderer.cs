@@ -47,29 +47,12 @@ namespace UnityGraphs
             return GUI.HorizontalScrollbar( new Rect( area.x + 1, area.yMax, area.width - 2, 16 ), scroll, ratio, 0, 1 );
         }
 
-        // public static void DrawGroupWrapperGUI( List<DrawGraph.Points> group )
-        // {
-        //     using( new EditorGUI.DisabledGroupScope( true ) )
-        //     {
-        //         GUILayout.TextArea( "" , GUILayout.Height( 100 ) );
-        //     }
-
-        //     Rect area = GUILayoutUtility.GetLastRect();
-            
-        //     RenderGraphGroup( area, group );
-
-        //     var scroll = group.Select( data => data._.scroll ).Aggregate( (a,b) => a > b ? a : b );
-
-        //     var mouse_over = area.Contains( Event.current.mousePosition );
-
-        //     if( mouse_over && scroll > -1 ) scroll = GUI.HorizontalScrollbar( new Rect( area.x + 1, area.yMax, area.width - 2, 16 ), scroll, 0.25f, 0, 1 );
-        // }
-
         /////////////////////////
         //
         //  Render Handles 
         //
 
+        /// TODO: add method to override graph light / dark style
         static bool IsDark { get { return true; }} // EditorGUIUtility.isProSkin; } }
 
         static Color GetAxisColor() { return IsDark ? new Color( 1, 1, 1, 0.5f ) : new Color( 0, 0, 0, 0.5f ); }
@@ -150,12 +133,6 @@ namespace UnityGraphs
 
             if( mouseInBounds ) RenderLine( mouse.x, area.y, mouse.x, area.yMax, GetAxisColor() );
 
-            // if( data[ 0 ]._.points.Count < 2 )
-            // {
-            //     RenderLabel( "Not enough Data", ( area.xMax - area.x ) / 2, ( area.yMax - area.y ) / 2, "#00000030", TextAnchor.MiddleCenter, false, 18 );
-            //     return;
-            // }
-
             for( var i = 0; i < data.Count; ++ i )
             {
                 // poker face variables 
@@ -184,18 +161,6 @@ namespace UnityGraphs
 
                 startIndex = Mathf.RoundToInt( ( totalPoints - visiblePoints ) * data_scroll );
                 lastIndexPlus1 = visiblePoints + startIndex;
-
-                // if( data[ i ]._.scroll == 1 && lastIndexPlus1 != totalPoints )
-                // {
-                //     Debug.LogWarning( "Bad calculation" );
-                // }
-                
-                // Debug.Log(
-                //     "Render[" + i + "] Last: " + 
-                //     data[ i ]._.points.Last().ToString("N2") + 
-                //     " \t " + 
-                //     data[ i ]._.points[ lastIndexPlus1 - 1 ].ToString("N2")
-                // );
 
                 var visible_points = data[ i ]._.points.GetRange( startIndex, visiblePoints );
 
