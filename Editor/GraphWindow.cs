@@ -236,7 +236,7 @@ namespace UnityGraphs
             } 
         }
 
-        void GraphGUI( DrawGraph.Points graph, float width )
+        void GraphGUI( GraphItem graph, float width )
         {
             var foldoutHeader = new GUIStyle( EditorStyles.foldoutHeader );
             // foldoutHeader.fixedWidth = width - 10;
@@ -244,7 +244,7 @@ namespace UnityGraphs
 
             var graphContianerLayout =  GUILayout.MaxWidth( Screen.width );
 
-            var group = new List<DrawGraph.Points> { graph } ;
+            var group = new List<GraphItem> { graph } ;
             
             using( new GUILayout.VerticalScope( GUILayout.MaxWidth( width ) ) )
             {
@@ -264,7 +264,7 @@ namespace UnityGraphs
             }
         }
 
-        void GraphGroupGUI( List<DrawGraph.Points> group, float width )
+        void GraphGroupGUI( List<GraphItem> group, float width )
         {
             var foldoutHeader = new GUIStyle( EditorStyles.foldoutHeader );
             // foldoutHeader.fixedWidth = width - 10;

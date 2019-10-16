@@ -5,7 +5,10 @@ using UnityEngine;
 
 namespace UnityGraphs.Demo
 {
+    // Graphs can be called while play mode is off, by updating the MonoBehaviour transform for example 
+    // or within another editor script or a window
     [ExecuteInEditMode]
+    
     public class DemoDrawGraph : MonoBehaviour
     {
         public bool updateGraph = false;

@@ -12,7 +12,7 @@ namespace UnityGraphs
         //  Graph GUI wrappers 
         //
 
-        public static void RenderGUI( List<DrawGraph.Points> group )
+        public static void RenderGUI( List<GraphItem> group )
         {
             float height = group._GetHeight();
 
@@ -103,12 +103,12 @@ namespace UnityGraphs
             Handles.DrawAAPolyLine( width, points );
         }
         
-        public static void RenderGraphData( Rect area, DrawGraph.Points data )
+        public static void RenderGraphData( Rect area, GraphItem data )
         {
-            RenderGraphGroup( area, new List<DrawGraph.Points> { data } );
+            RenderGraphGroup( area, new List<GraphItem> { data } );
         }
 
-        public static void RenderGraphGroup( Rect area, List<DrawGraph.Points> data )
+        public static void RenderGraphGroup( Rect area, List<GraphItem> data )
         {
             Vector2 mouse = Event.current.mousePosition;
             float DPI = EditorGUIUtility.pixelsPerPoint;
