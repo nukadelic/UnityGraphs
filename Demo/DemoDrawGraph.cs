@@ -6,7 +6,7 @@ using UnityEngine;
 namespace UnityGraphs.Demo
 {
     [ExecuteInEditMode]
-    public class TestDrawGraph : MonoBehaviour
+    public class DemoDrawGraph : MonoBehaviour
     {
         public bool updateGraph = false;
 
