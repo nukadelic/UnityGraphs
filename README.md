@@ -9,8 +9,10 @@ Supports: Vector3, Vector2, Quaternion, float
 
 Open in application top level menu: `Window > Analysis > Graph`
 
-See Demo Scene 
+See Demo Scene  
+  
 ![](Demo/pic1.png?raw=true)
 
-Access window settings: 
+Access window settings:   
+  
 ![](Demo/pic2.png?raw=true)
