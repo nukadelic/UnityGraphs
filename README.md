@@ -1,7 +1,16 @@
 # UnityGraphs
 
-Window is located in Window > Analysis > Graph
+Usage: 
+```
+// string title, float value, Color color = default
+DrawGraph.Add( "title", 33.3f );
+```
+Supports: Vector3, Vector2, Quaternion, float 
 
-See Demo > DemoDrawGraph.cs 
+Open in application top level menu: `Window > Analysis > Graph`
 
-![](https://media.discordapp.net/attachments/624703559581302795/632082826476519424/unknown.png)
+See Demo Scene 
+![](Demo/pic1.png?raw=true)
+
+Access window settings: 
+![](Demo/pic2.png?raw=true)
