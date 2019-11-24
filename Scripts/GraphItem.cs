@@ -24,5 +24,7 @@ namespace UnityGraphs
         public GraphItem SetGraphHeight( float f ) { _.graph_height = f; return this; }
         /// If the limit is reached the graph will pop the first element to avoid exceeding
         public GraphItem SetLengthLimit( int i ) { _.max_points = i; return this; }
+        /// Limit graph min & max values 
+        public GraphItem SetLimits( float min, float max ) { _.limits = new Vector2( min, max ); return this; }
     }
 }

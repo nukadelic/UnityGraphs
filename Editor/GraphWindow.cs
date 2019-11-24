@@ -48,22 +48,35 @@ namespace UnityGraphs
 
         public void AddItemsToMenu( GenericMenu menu )
         {
-            menu.AddItem(EditorGUIUtility.TrTextContent( "Auto Open on DrawGraph.Add(...)" ),
+            GraphStrings.MenuStrings();
+
+            menu.AddItem(GraphStrings.MenuAutoOpen,
                 data.autoOpen, () => { data.autoOpen = ! data.autoOpen; SaveData(); } );
 
-            menu.AddItem(EditorGUIUtility.TrTextContent( "Display graph data length" ),
+            menu.AddItem(GraphStrings.MenuDataLength,
                 data.showCounts, () => { data.showCounts = ! data.showCounts; SaveData(); } );
 
-            menu.AddItem(EditorGUIUtility.TrTextContent( "Preview values in header" ),
+            menu.AddItem(GraphStrings.MenuHeaderValues,
                 data.showValues, ()=> { data.showValues = ! data.showValues; SaveData(); } );
 
             menu.AddSeparator("");
 
-            menu.AddItem(EditorGUIUtility.TrTextContent("Expend All"), false, () => 
+            if( DrawGraph.Singelton().hasData )   
+                menu.AddItem( GraphStrings.MenuClearAll, false, ()=> DrawGraph.Clear() );
+            else
+                menu.AddDisabledItem( GraphStrings.MenuClearAll );
+
+            menu.AddSeparator("");
+
+            menu.AddItem(GraphStrings.MenuExpandAll, false, () => 
                 DrawGraph.Singelton().data.Values.ToList().ForEach( item => item._.visible = true ) );
 
-            menu.AddItem(EditorGUIUtility.TrTextContent("Collapse All"), false, () =>
+            menu.AddItem(GraphStrings.MenuCollapseAll, false, () =>
                 DrawGraph.Singelton().data.Values.ToList().ForEach( item => item._.visible = false ) );
+
+            menu.AddSeparator("");
+
+            menu.AddDisabledItem( GraphStrings.MenuDefaultItems );
         }
 
         ////////////////////////////////////
@@ -170,9 +183,9 @@ namespace UnityGraphs
         
         void OnGUI()
         {
-            if( DrawGraph.Singelton().data.Count == 0 ) 
+            if( ! DrawGraph.Singelton().hasData ) 
             {
-                EditorGUILayout.HelpBox( "No data", MessageType.Info );
+                EditorGUILayout.HelpBox( GraphStrings.NoData, MessageType.Info );
                 return;
             }
 
@@ -180,9 +193,9 @@ namespace UnityGraphs
             {
                 using( new GUILayout.HorizontalScope() )
                 {
-                    EditorGUILayout.HelpBox( "Window was auto opened, you can disable this in tab menu", MessageType.Info );
+                    EditorGUILayout.HelpBox( GraphStrings.AutoOpened, MessageType.Info );
 
-                    if( GUILayout.Button( IconGUI("LookDevClose") , GUILayout.Width( 30 ),  GUILayout.Height( 40 ) ) ) 
+                    if( GUILayout.Button( "X" , GUILayout.Width( 24 ),  GUILayout.Height( 38 ) ) ) 
                     
                         DismissAutoOpen = true;
 

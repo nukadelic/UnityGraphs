@@ -55,6 +55,8 @@ namespace UnityGraphs
         /// TODO: add method to override graph light / dark style
         static bool IsDark { get { return true; }} // EditorGUIUtility.isProSkin; } }
 
+        static float GridSize = 10f;
+
         static Color GetAxisColor() { return IsDark ? new Color( 1, 1, 1, 0.5f ) : new Color( 0, 0, 0, 0.5f ); }
         static Color GetGridColor() { return IsDark ? new Color( 1, 1, 1, 0.2f ) : new Color( 0, 0, 0, 0.2f ); }
 
@@ -120,13 +122,16 @@ namespace UnityGraphs
             Handles.color = IsDark ? Color.black : Color.white;
             Handles.DrawSolidRectangleWithOutline( area, Handles.color, Color.grey );
 
-            float grid_offset = - data[ 0 ]._.scroll * area.width;
+            float grid_offset = - Mathf.Clamp01( data[ 0 ]._.scroll ) * area.width;
+            grid_offset = grid_offset % GridSize;
+            if( grid_offset < 0 ) grid_offset += GridSize;
+
             string group = data[ 0 ]._.group;
 
-            for( var x = area.x + grid_offset; x < area.xMax; x += 10 )
+            for( var x = area.x + grid_offset; x < area.xMax; x += GridSize )
                 RenderLine( x, area.y, x, area.yMax, GetGridColor() );
 
-            for( var y = area.y; y < area.yMax; y += 10 )
+            for( var y = area.y; y < area.yMax; y += GridSize )
                 RenderLine( area.x, y, area.xMax, y, GetGridColor() );
 
             bool mouseInBounds = area.Contains( mouse );
@@ -176,6 +181,12 @@ namespace UnityGraphs
                     maxValue = visible_points.Aggregate( (a,b) => a > b ? a : b );
                     minValue = visible_points.Aggregate( (a,b) => a < b ? a : b );
                 }
+                
+                if( data[ i ]._.limits != Vector2.zero )
+                {
+                    minValue = data[ i ]._.limits.x;
+                    maxValue = data[ i ]._.limits.y;
+                }
 
                 int mouseIndex = -1;
 
@@ -203,6 +214,9 @@ namespace UnityGraphs
                     /// Normalize 
                     float x = ( j - index_shift ) * step;
                     float y = 1 - ( value - minValue ) / ( maxValue - minValue );
+
+                    // Prevent render overflow
+                    y = Mathf.Clamp01( y );
 
                     /// Relative to draw area 
                     x += area.x + x_shift;

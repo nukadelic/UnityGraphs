@@ -50,6 +50,8 @@ public class DrawGraph : MonoBehaviour
         return instance;
     }
 
+    public bool hasData { get { return data != null && data.Count > 0; } }
+
     static GraphItem ReadOrWrite( string title, float value = float.NaN, Color color = default, string group = "" )
     {
         var data = Singelton().data;

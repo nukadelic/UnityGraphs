@@ -11,14 +11,10 @@ namespace UnityGraphs.Demo
     
     public class DemoDrawGraph : MonoBehaviour
     {
-        public bool updateGraph = false;
+        public bool updateGraph = true;
 
         void Start()
         {
-            //Combine two graphs in the same view 
-            DrawGraph.Get("c1").SetGroup("GroupC");
-            DrawGraph.Get("c2").SetGroup("GroupC");
-
             // Supported types: float, Quaternion, Vector3
             DrawGraph.Add( "Vec3Test", Vector3.zero )
                 // Use System.Linq::ForEach( ... ) to assing group style values
@@ -26,7 +22,15 @@ namespace UnityGraphs.Demo
                     .SetLineWidth( 2f )
                     .SetGraphHeight( 120f )
                     .SetStepSize( 0.25f )
+                    .SetLimits( -2f, 2f )
                 );
+
+            DrawGraph.Add( "Empty graph test", 0f );
+
+            //Combine two graphs in the same view 
+            DrawGraph.Get("c1").SetGroup("GroupC");
+            DrawGraph.Get("c2").SetGroup("GroupC");
+
         }
 
         void Update()

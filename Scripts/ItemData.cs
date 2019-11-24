@@ -17,5 +17,6 @@ namespace UnityGraphs
         public bool visible = true;   
         public float graph_height = 50;    
         public int max_points = 1000;
+        public Vector2 limits = Vector3.zero;
     }
 }
