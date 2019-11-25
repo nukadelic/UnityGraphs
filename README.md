@@ -1,5 +1,7 @@
 # UnityGraphs
 
+Supports: 2019.1 + 
+
 Usage: 
 ```
 // string title, float value, Color color = default
